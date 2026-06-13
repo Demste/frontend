@@ -68,6 +68,19 @@ export const nodeConfigs = {
     description: 'Provides reusable text content for the workflow.',
     inputs: [],
     outputs: [{ id: 'output', label: 'Output' }],
+
+    dynamicInputs: {
+      field: 'text',
+    },
+
+    autoSize: {
+      field: 'text',
+      minWidth: 260,
+      maxWidth: 560,
+      minHeight: 170,
+      maxHeight: 440,
+    },
+
     fields: [
       {
         name: 'text',
@@ -76,6 +89,7 @@ export const nodeConfigs = {
         defaultValue: '{{input}}',
         placeholder: 'Enter text or use {{variables}}...',
         rows: 3,
+        autoResize: true,
       },
     ],
   },
