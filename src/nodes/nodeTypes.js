@@ -14,15 +14,41 @@ export const nodeTypes = Object.fromEntries(
   ])
 );
 
-export const toolbarNodes = [
-  { type: 'customInput', label: 'Input' },
-  { type: 'llm', label: 'LLM' },
-  { type: 'customOutput', label: 'Output' },
-  { type: 'text', label: 'Text' },
-  { type: 'prompt', label: 'Prompt' },
-  { type: 'summarizer', label: 'Summarizer' },
-  { type: 'classifier', label: 'Classifier' },
-  { type: 'translator', label: 'Translator' },
-  { type: 'apiRequest', label: 'API Request' },
-  { type: 'condition', label: 'Condition' },
+const toolbarOrder = [
+  'customInput',
+  'customOutput',
+  'text',
+  'llm',
+  'prompt',
+  'summarizer',
+  'classifier',
+  'translator',
+  'apiRequest',
+  'condition',
 ];
+
+export const toolbarNodes = toolbarOrder
+  .filter((type) => nodeConfigs[type])
+  .map((type) => ({
+    type,
+    label: nodeConfigs[type].title,
+    category: nodeConfigs[type].category || 'Other',
+    description: nodeConfigs[type].description,
+  }));
+
+export const toolbarNodeGroups = [
+  {
+    name: 'Core',
+    nodes: toolbarNodes.filter((node) => node.category === 'Core'),
+  },
+  {
+    name: 'AI Tools',
+    nodes: toolbarNodes.filter((node) => node.category === 'AI Tools'),
+  },
+  {
+    name: 'Logic & Integration',
+    nodes: toolbarNodes.filter(
+      (node) => node.category === 'Logic & Integration'
+    ),
+  },
+].filter((group) => group.nodes.length > 0);

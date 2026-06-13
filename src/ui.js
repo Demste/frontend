@@ -100,6 +100,20 @@ export const PipelineUI = () => {
         <Controls />
         <MiniMap />
       </ReactFlow>
+
+      {nodes.length === 0 && (
+        <div className="empty-canvas-overlay">
+          <div className="empty-canvas-card">
+            <div className="empty-canvas-card__badge">New workflow</div>
+            <div className="empty-canvas-card__title">
+              Start building your pipeline
+            </div>
+            <div className="empty-canvas-card__subtitle">
+              Drag a node from the sidebar to begin.
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

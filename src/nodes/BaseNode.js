@@ -57,6 +57,10 @@ export const BaseNode = ({ id, data, config }) => {
         <div className="base-node__description">{config.description}</div>
       )}
 
+      {config.description && (
+        <div className="base-node__tooltip">{config.description}</div>
+      )}
+
       {fields.length > 0 && (
         <div className="base-node__fields">
           {fields.map((field) => (

@@ -32,6 +32,13 @@ export const useStore = create((set, get) => ({
     });
   },
 
+  clearCanvas: () => {
+    set({
+      nodes: [],
+      edges: [],
+    });
+  },
+
   onNodesChange: (changes) => {
     set({
       nodes: applyNodeChanges(changes, get().nodes),

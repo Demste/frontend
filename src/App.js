@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { PipelineToolbar } from './toolbar';
 import { PipelineUI } from './ui';
 import { SubmitButton } from './submit';
@@ -11,6 +11,7 @@ function App() {
   const [appearance, setAppearance] = useState(() => {
     return localStorage.getItem('pipeline-appearance') || 'light';
   });
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('pipeline-accent', accent);
@@ -19,6 +20,22 @@ function App() {
   useEffect(() => {
     localStorage.setItem('pipeline-appearance', appearance);
   }, [appearance]);
+
+  useEffect(() => {
+    if (!toast) {
+      return undefined;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setToast(null);
+    }, 2400);
+
+    return () => window.clearTimeout(timeout);
+  }, [toast]);
+
+  const showToast = useCallback((message) => {
+    setToast(message);
+  }, []);
 
   return (
     <div
@@ -35,8 +52,16 @@ function App() {
 
       <main className="pipeline-workspace">
         <PipelineUI />
-        <SubmitButton />
+        <SubmitButton onNotify={showToast} />
       </main>
+
+      <div
+        className={`toast-region ${toast ? 'toast-region--visible' : ''}`}
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {toast && <div className="toast-message">{toast}</div>}
+      </div>
     </div>
   );
 }
