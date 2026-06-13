@@ -1,5 +1,4 @@
 import { BaseNode } from './BaseNode';
-import { TextNode } from './textNode';
 import { nodeConfigs } from './nodeConfigs';
 
 const createConfiguredNode = (config) => {
@@ -14,8 +13,6 @@ export const nodeTypes = Object.fromEntries(
     createConfiguredNode(config),
   ])
 );
-
-nodeTypes.text = TextNode;
 
 export const toolbarNodes = [
   { type: 'customInput', label: 'Input' },

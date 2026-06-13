@@ -55,6 +55,26 @@ export const nodeConfigs = {
       },
     ],
   },
+  text: {
+    type: 'text',
+    title: 'Text',
+    subtitle: 'Static content',
+    icon: 'T',
+    variant: 'prompt',
+    description: 'Provides reusable text content for the workflow.',
+    inputs: [],
+    outputs: [{ id: 'output', label: 'Output' }],
+    fields: [
+      {
+        name: 'text',
+        label: 'Text',
+        type: 'textarea',
+        defaultValue: '{{input}}',
+        placeholder: 'Enter text or use {{variables}}...',
+        rows: 3,
+      },
+    ],
+  },
 
   customOutput: {
     type: 'customOutput',
